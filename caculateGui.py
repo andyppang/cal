@@ -17,6 +17,28 @@ def renew(event):
     vtext += event.widget['text']
     label['text'] = vtext
 
+def caculate(event):
+    if '+' in vtext:
+        templist = vtext.split('+')
+        m = float(templist[0])
+        n = float(templist[1].split('=')[0])
+        result = m + n
+    if '-' in vtext:
+        templist = vtext.split('-')
+        m = float(templist[0])
+        n = float(templist[1].split('=')[0])
+        result = m - n
+    if '*' in vtext:
+        templist = vtext.split('*')
+        m = float(templist[0])
+        n = float(templist[1].split('=')[0])
+        result = m * n
+    if '/' in vtext:
+        templist = vtext.split('/')
+        m = float(templist[0])
+        n = float(templist[1].split('=')[0])
+        result = m / n
+    label['text'] = vtext + '=' + str(result)
 
 root = Tk()                              # 创建窗口
 root.title('简易计算器')
@@ -26,38 +48,51 @@ label.grid(row=0, column=0, columnspan=4, sticky=W)
 b1 = Button(root, text='1', width=5)
 b1.grid(row=1, column=0)
 b1.bind('<Button-1>', renew)
-
 b2 = Button(root, text='2', width=5, bg='yellow')
 b2.grid(row=1, column=1)
+b2.bind('<1>', renew)
 b3 = Button(root, text='3', width=5)
 b3.grid(row=1, column=2)
+b3.bind('<1>', renew)
 badd = Button(root, text='+', width=5)
 badd.grid(row=1, column=3)
+badd.bind('<1>', renew)
 b4 = Button(root, text='4', width=5, bg='yellow')
 b4.grid(row=2, column=0)
+b4.bind('<1>', renew)
 b5 = Button(root, text='5', width=5)
 b5.grid(row=2, column=1)
+b5.bind('<1>', renew)
 b6 = Button(root, text='6', width=5, bg='yellow')
 b6.grid(row=2, column=2)
+b6.bind('<1>', renew)
 bminus = Button(root, text='-', width=5)
 bminus.grid(row=2, column=3)
+bminus.bind('<1>', renew)
 b7 = Button(root, text='7', width=5)
 b7.grid(row=3, column=0)
+b7.bind('<1>', renew)
 b8 = Button(root, text='8', width=5, bg='yellow')
 b8.grid(row=3, column=1)
+b8.bind('<1>', renew)
 b9 = Button(root, text='9', width=5)
 b9.grid(row=3, column=2)
+b9.bind('<1>', renew)
 btimes = Button(root, text='*', width=5)
 btimes.grid(row=3, column=3)
+btimes.bind('<1>', renew)
 b0 = Button(root, text='0', width=5)
 b0.grid(row=4, column=0)
+b0.bind('<1>', renew)
 bdot = Button(root, text='.', width=5)
 bdot.grid(row=4, column=1)
+bdot.bind('<1>', renew)
 bequal = Button(root, text='=', width=5)
 bequal.grid(row=4, column=2)
+bequal.bind('<1>', caculate)                # ‘=‘号单击绑定caculate函数
 bdiv = Button(root, text='/', width=5)
 bdiv.grid(row=4, column=3)
-
+bdiv.bind('<1>', renew)
 
 root.mainloop()
 
