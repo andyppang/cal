@@ -10,11 +10,12 @@
 
 from tkinter import *
 
-# 捕获动作，获取点击按钮的'text'属性
+vtext = ''
+# 捕获动作，获取点击按钮的'text'属性，并在显示屏显示
 def renew(event):
-    global num
-    num = event.widget['text']
-    label['text'] = num
+    global vtext
+    vtext += event.widget['text']
+    label['text'] = vtext
 
 
 root = Tk()                              # 创建窗口
