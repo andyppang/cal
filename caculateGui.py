@@ -45,10 +45,15 @@ def reset(event):
     vtext = ''
     label['text'] = vtext
 
+def delete(event):
+    global vtext
+    vtext = vtext[:-1]                  # 字符串删除最后一个字符
+    label['text'] = vtext
+
 root = Tk()                              # 创建窗口
 root.title('简易计算器')
 root.geometry('300x300+600+300')
-label = Label(root, text='0', width=20, bg='yellow')               # 创建显示屏，默认显示0
+label = Label(root, text='0', width=25, bg='yellow')               # 创建显示屏，默认显示0
 label.grid(row=0, column=0, columnspan=4, sticky=W)
 # 数字按钮和加减乘除按钮
 b1 = Button(root, text='1', width=5)
@@ -93,15 +98,22 @@ b0.bind('<1>', renew)
 bdot = Button(root, text='.', width=5)
 bdot.grid(row=4, column=1)
 bdot.bind('<1>', renew)
+# 等号键进行计算，单击绑定caculate()函数
 bequal = Button(root, text='=', width=5)
 bequal.grid(row=4, column=2)
 bequal.bind('<1>', caculate)                # ‘=‘号单击绑定caculate函数
 bdiv = Button(root, text='/', width=5)
 bdiv.grid(row=4, column=3)
 bdiv.bind('<1>', renew)
+# 清零键，单击绑定reset()函数
 breset = Button(root, text='CE', width=5)
 breset.grid(row=1, column=4)
 breset.bind('<1>', reset)
+# 删除键，单击绑定del()函数
+bdelete = Button(root, text='Ⅹ', width=5)
+bdelete.grid(row=2, column=4)
+bdelete.bind('<1>', delete)
+
 root.mainloop()
 
 
