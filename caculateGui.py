@@ -40,11 +40,17 @@ def caculate(event):
         result = m / n
     label['text'] = vtext + '=' + str(result)
 
+def reset(event):
+    global vtext
+    vtext = ''
+    label['text'] = vtext
+
 root = Tk()                              # 创建窗口
 root.title('简易计算器')
-root.geometry('250x300+600+300')
+root.geometry('300x300+600+300')
 label = Label(root, text='0', width=20, bg='yellow')               # 创建显示屏，默认显示0
 label.grid(row=0, column=0, columnspan=4, sticky=W)
+# 数字按钮和加减乘除按钮
 b1 = Button(root, text='1', width=5)
 b1.grid(row=1, column=0)
 b1.bind('<Button-1>', renew)
@@ -93,7 +99,9 @@ bequal.bind('<1>', caculate)                # ‘=‘号单击绑定caculate函�
 bdiv = Button(root, text='/', width=5)
 bdiv.grid(row=4, column=3)
 bdiv.bind('<1>', renew)
-
+breset = Button(root, text='CE', width=5)
+breset.grid(row=1, column=4)
+breset.bind('<1>', reset)
 root.mainloop()
 
 
