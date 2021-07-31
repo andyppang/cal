@@ -2,13 +2,13 @@ from PIL import Image as img
 from tkinter import *
 from tkinter.filedialog import *
 
-
+# 创建字典存放图片路径
 info = {'path': []}
 
-
+# 打开路径
 def open_path():
-    filenames = askopenfilenames()
-    lbox = app.children['listbox']
+    filenames = askopenfilenames()  # 文件路径列表
+    lbox = app.children['listbox']  # 获取窗口子对象
     info['path'] = filenames
     if info['path']:
         for name in filenames:
@@ -17,7 +17,6 @@ def open_path():
 
 def compress():
     output = 'C:/Users/pl/Desktop/'
-    print(info['path'])
     for filepath in info['path']:
         name = filepath.split('/')[-1]
         image = img.open(filepath)
