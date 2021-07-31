@@ -14,7 +14,7 @@ def open_path():
     if path:
         for filepath in path:
             name = filepath.split('/')[-1]  # 获取文件名
-            lbox.insert(END, name)
+            lbox.insert(END, name)  # 向listbox末尾添加图片名称
 
 
 # 压缩图片
@@ -23,7 +23,19 @@ def compress():
     for filepath in path:
         name = filepath.split('/')[-1]  # 获取文件名
         image = img.open(filepath)      # 读取图片
+        # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
         image.save(output+'压缩'+name, quality=50)    # 保存图片并改名，改质量
+
+
+# 调整图片大小
+def resize():
+    output = 'C:/Users/pl/Desktop/'  # 存放压缩文件的路径
+    for filepath in path:
+        name = filepath.split('/')[-1]  # 获取文件名
+        image = img.open(filepath)  # 读取图片
+        # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
+        image_small = image.resize((50, 30))
+        image_small.save(output + '变小' + name, quality=50)  # 保存图片并改名，改质量
 
 
 # 交互界面窗口
@@ -34,6 +46,7 @@ def gui_app():
     Listbox(app, name='listbox', bg='#f2f2f2').pack(fill=BOTH, expand=True)
     Button(app, text='打开路径', command=open_path).pack()
     Button(app, text='开始压缩', command=compress).pack()
+    Button(app, text='调整大小', command=resize).pack()
     return app
 
 
