@@ -1,6 +1,8 @@
 """
 图片处理小程序
 主要功能：选取多张图片进行压缩、调整大小
+知识点：首先给窗口的每个部件给予name属性，则可以通过 窗口.children['name'] 获取到该部件
+从而可对该部件进行外部调用操作
 """
 from PIL import Image as img
 from tkinter import *
@@ -48,15 +50,17 @@ def resize():
 def gui_app():
     app = Tk()
     app.geometry('300x400')
-    Label(app, text='压缩图片小程序', font=('Arial', 20, 'bold')).pack()
+    Label(app, text='图片处理小程序', font=('Arial', 20, 'bold')).pack()
     Listbox(app, name='listbox', bg='#f2f2f2').pack(fill=BOTH, expand=True)
     Button(app, text='打开路径', command=open_path).pack()
-    Button(app, text='开始压缩', command=compress).pack()
-    Button(app, text='调整大小', command=resize).pack()
+    Button(app, text='压缩图片', command=compress).pack()
+    Button(app, text='调整大小', command=resize).pack(side=LEFT)
     e1 = StringVar()
+    e1.set('宽')
     e2 = StringVar()
-    Entry(app, name='x', textvariable=e1).pack(side=LEFT, fill='x')
-    Entry(app, name='y', textvariable=e2).pack(side=LEFT, fill='x')
+    e2.set('高')
+    Entry(app, name='x', textvariable=e1, width=12).pack(anchor=CENTER, fill=BOTH)
+    Entry(app, name='y', textvariable=e2, width=12).pack(anchor=CENTER, fill=BOTH)
     return app
 
 
