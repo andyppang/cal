@@ -1,8 +1,12 @@
+"""
+图片处理小程序
+主要功能：选取多张图片进行压缩、调整大小
+"""
 from PIL import Image as img
 from tkinter import *
 from tkinter.filedialog import *
 
-# 创建空列表存放图片路径
+# 创建空列表存放图片路径，全局变量供各个功能函数调用
 path = []
 
 
@@ -48,11 +52,11 @@ def gui_app():
     Listbox(app, name='listbox', bg='#f2f2f2').pack(fill=BOTH, expand=True)
     Button(app, text='打开路径', command=open_path).pack()
     Button(app, text='开始压缩', command=compress).pack()
-    Button(app, text='调整大小', command=resize).pack(anchor='w', side='left', expand=True)
+    Button(app, text='调整大小', command=resize).pack()
     e1 = StringVar()
     e2 = StringVar()
-    Entry(app, name='x', textvariable=e1).pack(anchor='w', side='left', expand=True)
-    Entry(app, name='y', textvariable=e2).pack(anchor='e', side='left', expand=True)
+    Entry(app, name='x', textvariable=e1).pack(side=LEFT, fill='x')
+    Entry(app, name='y', textvariable=e2).pack(side=LEFT, fill='x')
     return app
 
 
