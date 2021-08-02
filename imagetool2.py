@@ -12,6 +12,7 @@ from tkinter.filedialog import *
 path = []
 logo_path = []
 
+
 # 打开路径
 def open_path():
     global path
@@ -26,13 +27,13 @@ def open_path():
 # 压缩图片
 def compress():
     output = 'C:/Users/pl/Desktop/'     # 存放压缩文件的路径
-    for filepath in path:
-        name = filepath.split('/')[-1]  # 获取文件名
-        image = img.open(filepath)      # 读取图片
-        # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
-        image.save(output+'压缩'+name, quality=50)    # 保存图片并改名，改质量
     try:
-        app.children['message']['text'] = '压缩完成'
+        for filepath in path:
+            name = filepath.split('/')[-1]  # 获取文件名
+            image = img.open(filepath)      # 读取图片
+            # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
+            image.save(output+'压缩'+name, quality=50)    # 保存图片并改名，改质量
+            app.children['message']['text'] = '压缩完成'
     except:
         app.children['message']['text'] = '出错啦'
 
@@ -42,14 +43,14 @@ def resize():
     output = 'C:/Users/pl/Desktop/'  # 存放压缩文件的路径
     x = app.children['x'].get()     # 获取app窗口的名称为'x'的部件，即输入框的值
     y = app.children['y'].get()     # 获取app窗口的名称为'y‘的部件，即输入框的值
-    for filepath in path:
-        name = filepath.split('/')[-1]  # 获取文件名
-        image = img.open(filepath)  # 读取图片
-        # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
-        image_small = image.resize((int(x), int(y)))    # 注意resize函数的大小为元组形式
-        image_small.save(output + '变小' + name)  # 保存图片并改名
     try:
-        app.children['message']['text'] = '大小调整完成'
+        for filepath in path:
+            name = filepath.split('/')[-1]  # 获取文件名
+            image = img.open(filepath)  # 读取图片
+            # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
+            image_small = image.resize((int(x), int(y)))    # 注意resize函数的大小为元组形式
+            image_small.save(output + '变小' + name)  # 保存图片并改名
+            app.children['message']['text'] = '大小调整完成'
     except:
         app.children['message']['text'] = '出错啦'
 
@@ -63,18 +64,18 @@ def copy():
     output = 'C:/Users/pl/Desktop/'
     x = app.children['x'].get()  # 获取app窗口的名称为'x'的部件，即输入框的值
     y = app.children['y'].get()  # 获取app窗口的名称为'y‘的部件，即输入框的值
-    for filepath in path:
-        name = filepath.split('/')[-1]  # 获取文件名
-        image = img.open(filepath)  # 读取图片
-        logo = img.open(logo_path)  # 读取logo图片
-        logo.convert('RGBA')
-        logo.thumbnail((200, 200))  # 将logo改成合适的大小
-        image_copy = image.copy()   # 复制图象
-        position = (int(x), int(y))           # 粘贴的位置
-        image_copy.paste(logo, position)
-        image_copy.save(output + '水印' + name)   # 保存图片并改名
     try:
-        app.children['message']['text'] = '已添加水印'
+        for filepath in path:
+            name = filepath.split('/')[-1]  # 获取文件名
+            image = img.open(filepath)  # 读取图片
+            logo = img.open(logo_path)  # 读取logo图片
+            logo.convert('RGBA')
+            logo.thumbnail((200, 200))  # 将logo改成合适的大小
+            image_copy = image.copy()   # 复制图象
+            position = (int(x), int(y))           # 粘贴的位置
+            image_copy.paste(logo, position)
+            image_copy.save(output + '水印' + name)   # 保存图片并改名
+            app.children['message']['text'] = '已添加水印'
     except:
         app.children['message']['text'] = '出错啦'
 
