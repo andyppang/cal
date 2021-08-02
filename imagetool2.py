@@ -31,6 +31,10 @@ def compress():
         image = img.open(filepath)      # 读取图片
         # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
         image.save(output+'压缩'+name, quality=50)    # 保存图片并改名，改质量
+    try:
+        app.children['message']['text'] = '压缩完成'
+    except:
+        app.children['message']['text'] = '出错啦'
 
 
 # 调整图片大小
@@ -44,6 +48,11 @@ def resize():
         # print(image.format, image.size, image.mode)   # 图片格式，大小，像素类型
         image_small = image.resize((int(x), int(y)))    # 注意resize函数的大小为元组形式
         image_small.save(output + '变小' + name)  # 保存图片并改名
+    try:
+        app.children['message']['text'] = '大小调整完成'
+    except:
+        app.children['message']['text'] = '出错啦'
+
 
 def select_logo():
     global logo_path
@@ -58,11 +67,16 @@ def copy():
         name = filepath.split('/')[-1]  # 获取文件名
         image = img.open(filepath)  # 读取图片
         logo = img.open(logo_path)  # 读取logo图片
-        logo.thumbnail((100, 100))  # 将logo改成合适的大小
+        logo.convert('RGBA')
+        logo.thumbnail((200, 200))  # 将logo改成合适的大小
         image_copy = image.copy()   # 复制图象
         position = (int(x), int(y))           # 粘贴的位置
         image_copy.paste(logo, position)
         image_copy.save(output + '水印' + name)   # 保存图片并改名
+    try:
+        app.children['message']['text'] = '已添加水印'
+    except:
+        app.children['message']['text'] = '出错啦'
 
 
 # 交互界面窗口
@@ -76,6 +90,7 @@ def gui_app():
     e1.set('宽')
     e2 = StringVar()
     e2.set('高')
+    Label(app, name='message', text='这里用来显示反馈信息').pack(side=BOTTOM, fill=X)
     Entry(app, name='x', textvariable=e1, width=12).pack(side=BOTTOM, fill=X)
     Entry(app, name='y', textvariable=e2, width=12).pack(side=BOTTOM, fill=X)
     Button(app, text='压缩图片', command=compress).pack(side=LEFT, fill=X, padx=1)
